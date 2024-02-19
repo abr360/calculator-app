@@ -9,16 +9,7 @@ trigger:
 pool: mylocalpool
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+
 
 # Maven v3
 # Build, test, and deploy with Apache Maven.
@@ -61,3 +52,13 @@ steps:
     #spotBugsVersion: '4.5.3.0' # string. Alias: spotBugsMavenPluginVersion. Optional. Use when spotBugsAnalysisEnabled = true. Version number. Default: 4.5.3.0.
     #spotBugsGoal: 'spotbugs' # 'spotbugs' | 'check'. Optional. Use when spotBugsAnalysisEnabled = true. The goal for the spotbugs plugin. Default: spotbugs.
     #failWhenBugsFound: true # boolean. Alias: spotBugsFailWhenBugsFound | sbFailWhenBugsFound. Optional. Use when spotBugsAnalysisEnabled = true && spotBugsGoal = check. Fail when bugs are found with spotbugs:check. Default: true.
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
