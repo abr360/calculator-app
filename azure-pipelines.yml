@@ -10,7 +10,7 @@ steps:
     versionSpec: '8'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'LocalDirectory'
-    jdkFile: '/builds/jre-8u291-linux-x64.tar.gz'
+    jdkFile: ' /builds/binaries/externals/JAVA_HOME_8_X64_jre-8u291-linux-x64.tar.gz'
     jdkDestinationDirectory: '/builds/binaries/externals'
     cleanDestinationDirectory: true
 
