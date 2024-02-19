@@ -7,7 +7,7 @@ pool:
 steps:
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '11'
+    versionSpec: '8'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'LocalDirectory'
     jdkFile: '/builds/jre-8u291-linux-x64.tar.gz'
@@ -19,7 +19,7 @@ steps:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '11'  # Adjust the version according to your project's requirements
+    jdkVersionOption: '8'  # Adjust the version according to your project's requirements
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
