@@ -20,15 +20,8 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: Maven@3
+- task: JavaToolInstaller@0
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'package'
-    options: '-Xmx3072m'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-DskipTests=true'
-    jdkVersionOption: '8'
+    versionSpec: '8'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean install'
+    jdkSourceOption: 'PreInstalled'
