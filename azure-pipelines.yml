@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: mylocalpool
+pool: mywinpool
 
 steps:
 - task: Maven@3
