@@ -6,15 +6,37 @@
 trigger:
 - main
 
-pool: mywinpool
+pool:
+  name: devlab2
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: MavenPackage
+    displayName: Maven Package
+    pool:
+      name: devlab2
+    steps:
+    - task: Maven@3
+      displayName: 'Maven Package'
+      inputs:
+        mavenPomFile: 'pom.xml'
+    
+- stage: PublishArtifact
+  displayName: 'Publish Artifact'
+  jobs:
+  - job: PublishArtifact
+    displayName: 'Publish Artifact'
+    pool:
+      name: devlab2
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/target/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: drop
