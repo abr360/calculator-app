@@ -6,8 +6,7 @@
 trigger:
 - main
 
-pool:
-  name: devlab2
+pool: devlab2
 
 stages:
 - stage: Build
@@ -15,8 +14,7 @@ stages:
   jobs:
   - job: MavenPackage
     displayName: Maven Package
-    pool:
-      name: devlab2
+    pool: devlab2
     steps:
     - task: Maven@3
       displayName: 'Maven Package'
@@ -28,8 +26,7 @@ stages:
   jobs:
   - job: PublishArtifact
     displayName: 'Publish Artifact'
-    pool:
-      name: devlab2
+    pool: devlab2
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
