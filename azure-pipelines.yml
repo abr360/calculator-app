@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: devlab2
+pool: myclgpool
 
 stages:
 - stage: Build
