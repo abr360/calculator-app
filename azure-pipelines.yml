@@ -14,7 +14,7 @@ stages:
   jobs:
   - job: MavenPackage
     displayName: Maven Package
-    pool: devlab2
+    pool: mywinpool
     steps:
     - task: Maven@3
       displayName: 'Maven Package'
