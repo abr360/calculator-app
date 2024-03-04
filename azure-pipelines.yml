@@ -26,7 +26,7 @@ stages:
   jobs:
   - job: PublishArtifact
     displayName: 'Publish Artifact'
-    pool: devlab2
+    pool: mywinpool
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
