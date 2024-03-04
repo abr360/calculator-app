@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: myclgpool
+pool: mywinpool
 
 stages:
 - stage: Build
