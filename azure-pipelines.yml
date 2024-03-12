@@ -14,7 +14,7 @@ stages:
   jobs:
   - job: MavenPackage
     displayName: Maven Package
-    pool: mywinpool
+    pool: mysky
     steps:
     - task: Maven@3
       displayName: 'Maven Package'
@@ -26,7 +26,7 @@ stages:
   jobs:
   - job: PublishArtifact
     displayName: 'Publish Artifact'
-    pool: mywinpool
+    pool: mysky
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
