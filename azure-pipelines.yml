@@ -1,12 +1,10 @@
 trigger:
 - main
 
-pool:
-  name: mysky
+pool: mysky
 
 steps:
 - script: echo "Stage 1 - Setting up Java version."
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -14,7 +12,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/target/surefire-reports/TEST-*.xml' # Adjusted path to match Maven output structure
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
 - script: echo "Stage 2 - Maven build and test completed successfully."
@@ -23,14 +21,15 @@ steps:
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
     ArtifactName: 'my-java-artifacts'
-    publishLocation: 'Container'
+    publishLocation: 'container'
 
 - script: echo "Stage 3 - Artifacts published successfully."
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/target/surefire-reports/TEST-*.xml' # Adjusted path to match Maven output structure
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     failTaskOnFailedTests: true
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 
-- script: echo "Regression test is successfully completed."
+- script: echo "Regression test is successfully completed.”
