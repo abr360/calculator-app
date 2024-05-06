@@ -13,7 +13,6 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/custom-reports/TEST-*.xml' # Adjusted path based on Surefire Report output directory
     goals: 'package'
 
 - script: echo "Stage 2 - Maven build and test completed successfully."
@@ -25,6 +24,10 @@ steps:
     publishLocation: 'container'
 
 - script: echo "Stage 3 - Artifacts published successfully."
+
+- script: |
+    echo "Debugging: Listing contents of directory"
+    ls -R $(System.DefaultWorkingDirectory)
 
 - task: PublishTestResults@2
   inputs:
