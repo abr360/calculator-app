@@ -13,7 +13,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/custom-reports/TEST-*.xml' # Adjusted path based on Surefire Report output directory
     goals: 'package'
 
 - script: echo "Stage 2 - Maven build and test completed successfully."
@@ -29,7 +29,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/target/surefire-reports/TEST-*.xml' # Corrected path
+    testResultsFiles: '**/custom-reports/TEST-*.xml' # Adjusted path based on Surefire Report output directory
     failTaskOnFailedTests: true
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
