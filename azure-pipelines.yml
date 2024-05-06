@@ -1,7 +1,7 @@
 trigger:
 - main
 
-pool: winpool
+pool: mysky
 
 steps:
 - script: echo "Stage 1 - Setting up Java version."
@@ -25,6 +25,10 @@ steps:
     publishLocation: 'container'
 
 - script: echo "Stage 3 - Artifacts published successfully."
+
+- script: |
+    ls -R $(System.DefaultWorkingDirectory)
+    echo "End of directory listing"
 
 - task: PublishTestResults@2
   inputs:
