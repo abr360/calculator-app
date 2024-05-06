@@ -5,7 +5,7 @@ pool: mysky
 
 steps:
 - script: echo "Stage 1 - Setting up Java version."
-  
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
