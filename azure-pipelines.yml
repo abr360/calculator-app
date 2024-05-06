@@ -4,36 +4,37 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+- master
 
 pool: mysky
 
-stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: MavenPackage
-    displayName: Maven Package
-    pool: mysky
-    steps:
-    - task: Maven@3
-      displayName: 'Maven Package'
-      inputs:
-        mavenPomFile: 'pom.xml'
-    
-- stage: PublishArtifact
-  displayName: 'Publish Artifact'
-  jobs:
-  - job: PublishArtifact
-    displayName: 'Publish Artifact'
-    pool: mysky
-    steps:
-    - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/target/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+steps:
+- script: echo "Stage 1 - Setting up Java version."
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
 
-    - publish: $(Build.ArtifactStagingDirectory)
-      artifact: drop
+- script: echo "Stage 2 - Maven build and test completed successfully."
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
+    ArtifactName: 'my-java-artifacts'
+    publishLocation: 'container'
+
+- script: echo "Stage 3 - Artifacts published successfully."
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    failTaskOnFailedTests: true
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+
+- script: echo "Regression test is successfully completed."
