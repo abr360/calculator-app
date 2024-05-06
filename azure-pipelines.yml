@@ -5,6 +5,7 @@ pool: mysky
 
 steps:
 - script: echo "Stage 1 - Setting up Java version."
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -28,8 +29,8 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/**/surefire-reports/TEST-*.xml'
     failTaskOnFailedTests: true
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
-- script: echo "Regression test is successfully completed.”
+- script: echo "Regression test is successfully completed."
