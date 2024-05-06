@@ -1,3 +1,9 @@
+#exp no 1 and 2
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
 trigger:
 - main
 
@@ -5,7 +11,6 @@ pool: mysky
 
 steps:
 - script: echo "Stage 1 - Setting up Java version."
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -26,11 +31,30 @@ steps:
 
 - script: echo "Stage 3 - Artifacts published successfully."
 
-- task: PublishTestResults@2
+- task: PublishTestResults@1
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '/home/abr-vm/devlab/2/s/target/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     failTaskOnFailedTests: true
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
-- script: echo "Regression test is successfully completed.”
+- script: echo "Regression test is successfully completed."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
