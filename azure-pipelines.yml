@@ -31,7 +31,7 @@ steps:
 
 - script: echo "Stage 3 - Artifacts published successfully."
 
-- task: PublishTestResults@1
+- task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/2/s/target/surefire-reports/TEST-*.xml'
