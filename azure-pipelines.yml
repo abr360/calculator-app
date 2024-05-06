@@ -34,7 +34,7 @@ steps:
 - task: PublishTestResults@1
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/2/s/target/surefire-reports/TEST-*.xml'
     failTaskOnFailedTests: true
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
