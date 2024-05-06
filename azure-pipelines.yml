@@ -5,18 +5,18 @@ pool: mysky
 
 steps:
 - script: echo "Stage 1 - Setting up Java version."
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    **publishJUnitResults: true**  # Ensure JUnit results are published
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'  # Correct path pattern
+    goals: 'test'  # Use 'test' goal to run tests
 
 - script: echo "Stage 2 - Maven build and test completed successfully."
+  **condition: succeeded()**  # Conditionally run only if Maven succeeds
 
 - task: PublishBuildArtifacts@1
   inputs:
@@ -26,15 +26,13 @@ steps:
 
 - script: echo "Stage 3 - Artifacts published successfully."
 
-- script: |
-    ls -R $(System.DefaultWorkingDirectory)
-    echo "End of directory listing"
-
 - task: PublishTestResults@2
+  **condition: succeeded()**  # Conditionally run only if Maven succeeds
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'  # Correct path pattern
     failTaskOnFailedTests: true
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - script: echo "Regression test is successfully completed."
+  **condition: succeeded()**  # Conditionally run only if previous stages succeed
